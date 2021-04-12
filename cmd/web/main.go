@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/zanderson3j/marvel-char-comics/pkg/marvelclient"
 )
@@ -21,6 +22,7 @@ func main() {
 	mux.HandleFunc("/character", app.character)
 	mux.HandleFunc("/character/comics", app.comics)
 
-	err := http.ListenAndServe(":8000", mux)
+	port := os.Getenv("PORT")
+	err := http.ListenAndServe(":"+port, mux)
 	log.Fatal(err)
 }
